@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #eef7ff, #fff3d6);
+      background: linear-gradient(135deg, #f7e7ff, #fff1d6);
       color: #2f3e46;
       margin: 0;
       padding: 24px;
@@ -49,7 +49,7 @@
       font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 14px;
-      color: #2563eb;
+      color: #000000;
     }
 
     .opciones {
@@ -130,7 +130,7 @@
   <main class="contenedor">
     <h1>Cuestionario: músculos y huesos</h1>
     <p class="intro">Responde a estas 10 preguntas y descubre cuánto sabes sobre tu cuerpo.</p>
-    <img class="imagen" src="images/176289449-sistema-muscular-humano-esquema-y-plantilla-para-anatomía-lección-de-biología-frente-vista.jpg" alt="Ilustración más realista del cuerpo humano con músculos">
+    <img id="imagenPregunta" class="imagen" src="images/esqueleto.jpg" alt="Imagen de un esqueleto">
 
     <section id="quiz">
       <div id="pregunta" class="pregunta"></div>
@@ -153,52 +153,72 @@
       {
         pregunta: '¿Qué ayudan a sostener el cuerpo?',
         opciones: ['Los huesos', 'Las nubes', 'Los zapatos'],
-        correcta: 0
+        correcta: 0,
+        imagen: 'images/esqueleto.jpg',
+        alt: 'Imagen de un esqueleto'
       },
       {
         pregunta: '¿Qué nos ayudan a movernos?',
         opciones: ['Los músculos', 'Las puertas', 'Las estrellas'],
-        correcta: 0
+        correcta: 0,
+        imagen: 'images/176289449-sistema-muscular-humano-esquema-y-plantilla-para-anatomía-lección-de-biología-frente-vista.jpg',
+        alt: 'Ilustración más realista del cuerpo humano con músculos'
       },
       {
         pregunta: '¿Cuál de estos es un hueso?',
         opciones: ['Brazo', 'Pierna', 'Fémur'],
-        correcta: 2
+        correcta: 2,
+        imagen: 'images/huesos.jpg',
+        alt: 'Imagen de un hueso'
       },
       {
         pregunta: '¿Dónde está el cráneo?',
         opciones: ['En la cabeza', 'En la mano', 'En el pie'],
-        correcta: 0
+        correcta: 0,
+        imagen: 'images/niño.jpg',
+        alt: 'Imagen del cuerpo de un niño'
       },
       {
         pregunta: '¿Qué músculos usamos cuando levantamos un objeto?',
         opciones: ['Los músculos del brazo', 'Las orejas', 'La lengua'],
-        correcta: 0
+        correcta: 0,
+        imagen: 'images/levantando  vaso.jpg',
+        alt: 'Persona levantando una caja'
       },
       {
         pregunta: '¿Qué parte del cuerpo protege el cerebro?',
         opciones: ['La columna', 'El cráneo', 'La rodilla'],
-        correcta: 1
+        correcta: 1,
+        imagen: 'images/cerebro.jpg',
+        alt: 'Imagen de un cerebro'
       },
       {
         pregunta: '¿Qué hueso está en la espalda y nos ayuda a mantener el cuerpo recto?',
         opciones: ['La columna', 'El codo', 'El tobillo'],
-        correcta: 0
+        correcta: 0,
+        imagen: 'images/esqueleto.jpg',
+        alt: 'Imagen de un esqueleto'
       },
       {
         pregunta: '¿Qué músculo está en el brazo y nos ayuda a doblarlo?',
         opciones: ['El bíceps', 'El estómago', 'El ojo'],
-        correcta: 0
+        correcta: 0,
+        imagen: 'images/levantando  vaso.jpg',
+        alt: 'Imagen de alguien levantando un vaso'
       },
       {
         pregunta: '¿Qué huesos protegen los órganos del pecho?',
         opciones: ['Las costillas', 'Los dientes', 'Los dedos'],
-        correcta: 0
+        correcta: 0,
+        imagen: 'images/esqueleto.jpg',
+        alt: 'Imagen de un esqueleto'
       },
       {
         pregunta: '¿Qué pasa cuando movemos los músculos?',
         opciones: ['Nos movemos', 'Nos volvemos de piedra', 'Nos ponemos a dormir'],
-        correcta: 0
+        correcta: 0,
+        imagen: 'images/niño.jpg',
+        alt: 'Imagen de un niño'
       }
     ];
 
@@ -210,6 +230,7 @@
     const resultadoEl = document.getElementById('resultado');
     const mensajeResultadoEl = document.getElementById('mensajeResultado');
     const reiniciarBtn = document.getElementById('reiniciar');
+    const imagenPreguntaEl = document.getElementById('imagenPregunta');
 
     let indiceActual = 0;
     let aciertos = 0;
@@ -231,6 +252,8 @@
         opcionesEl.appendChild(boton);
       });
 
+      imagenPreguntaEl.src = pregunta.imagen || 'images/176289449-sistema-muscular-humano-esquema-y-plantilla-para-anatomía-lección-de-biología-frente-vista.jpg';
+      imagenPreguntaEl.alt = pregunta.alt || 'Imagen de referencia para la pregunta';
       siguienteBtn.disabled = true;
     }
 
@@ -282,6 +305,15 @@
       }
 
       mensajeResultadoEl.textContent = `Has acertado ${aciertos} de ${preguntas.length} preguntas (${porcentaje}%). ${mensaje}`;
+      const imagenExistente = resultadoEl.querySelector('img');
+      if (imagenExistente) {
+        imagenExistente.remove();
+      }
+      const imagenResultado = document.createElement('img');
+      imagenResultado.src = 'images/celebrando.jpg';
+      imagenResultado.alt = 'Celebrando';
+      imagenResultado.className = 'imagen';
+      resultadoEl.appendChild(imagenResultado);
     }
 
     function reiniciarQuiz() {
