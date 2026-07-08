@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coloca los músculos - Trasera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="muscles-page">
+  <div class="contenedor">
+    <a class="menu-inicial" href="index.html">Menú inicial</a>
+    <a class="menu-inicial arriba-derecha" href="musculos.html">Ir a la parte delantera</a>
+    <h1>Arrastra cada músculo a su sitio</h1>
+    <p class="intro">Completa la parte trasera del cuerpo humano.</p>
+
+    <section class="muscles-board">
+      <h2>Parte trasera</h2>
+      <div class="panel">
+        <div class="lista" id="listaMusculosPosterior">
+          <div class="musculo" draggable="true" data-musculo="Deltoides">Deltoides</div>
+          <div class="musculo" draggable="true" data-musculo="Trapecio">Trapecio</div>
+          <div class="musculo" draggable="true" data-musculo="Tríceps">Tríceps</div>
+          <div class="musculo" draggable="true" data-musculo="Isquiotibiales">Isquiotibiales</div>
+          <div class="musculo" draggable="true" data-musculo="Glúteos">Glúteos</div>
+          <div class="musculo" draggable="true" data-musculo="Dorsal">Dorsal</div>
+        </div>
+
+        <div class="imagen-container">
+          <img src="images/musculos_detras.png" alt="Músculos del cuerpo humano, vista trasera">
+
+          <div class="zona" data-musculo="Deltoides" style="left: 22%; top: 29%;"></div>
+          <div class="zona" data-musculo="Tríceps" style="left: 22%; top: 40%;"></div>
+          <div class="zona" data-musculo="Trapecio" style="left: 82%; top: 33%;"></div>
+          <div class="zona" data-musculo="Dorsal" style="left: 83.5%; top: 41.0%;"></div>
+          <div class="zona" data-musculo="Glúteos" style="left: 82%; top: 66.5%;"></div>
+          <div class="zona" data-musculo="Isquiotibiales" style="left: 24%; top: 77.5%;"></div>
+        </div>
+      </div>
+
+      <div class="feedback">Arrastra un musculo y sueltalo en su lugar.</div>
+      <button class="boton-reset" type="button">Volver a empezar</button>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
