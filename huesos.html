@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coloca los huesos - Delantera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="muscles-page">
+  <div class="contenedor">
+    <a class="menu-inicial" href="index.html">Menú inicial</a>
+    <h1>Arrastra cada hueso a su sitio</h1>
+    <p class="intro">Completa la parte delantera del esqueleto humano.</p>
+
+    <section class="muscles-board">
+      <h2>Parte delantera</h2>
+      <div class="panel">
+        <div class="lista" id="listaHuesosFrontal">
+          <div class="musculo" draggable="true" data-musculo="Cráneo">Cráneo</div>
+          <div class="musculo" draggable="true" data-musculo="Clavícula">Clavícula</div>
+          <div class="musculo" draggable="true" data-musculo="Costillas">Costillas</div>
+          <div class="musculo" draggable="true" data-musculo="Radio y Cúbito">Radio y Cúbito</div>
+          <div class="musculo" draggable="true" data-musculo="Húmero">Húmero</div>
+          <div class="musculo" draggable="true" data-musculo="Columna vertebral">Columna vertebral</div>
+          <div class="musculo" draggable="true" data-musculo="Pelvis">Pelvis</div>
+          <div class="musculo" draggable="true" data-musculo="Fémur">Fémur</div>
+          <div class="musculo" draggable="true" data-musculo="Peroné">Peroné</div>
+          <div class="musculo" draggable="true" data-musculo="Tibia">Tibia</div>
+        </div>
+
+        <div class="imagen-container">
+          <img src="images/esqueleto_huesos.png" alt="Esqueleto humano, vista delantera">
+
+          <div class="zona" data-musculo="Cráneo" style="left: 22%; top: 29%;"></div>
+          <div class="zona" data-musculo="Costillas" style="left: 22%; top: 40%;"></div>
+          <div class="zona" data-musculo="Radio y Cúbito" style="left: 22%; top: 48.5%;"></div>
+          <div class="zona" data-musculo="Peroné" style="left: 24%; top: 77.5%;"></div>
+          <div class="zona" data-musculo="Tibia" style="left: 24%; top: 85%;"></div>
+          <div class="zona" data-musculo="Clavícula" style="left: 82%; top: 33%;"></div>
+          <div class="zona" data-musculo="Húmero" style="left: 83.5%; top: 41.0%;"></div>
+          <div class="zona" data-musculo="Columna vertebral" style="left: 82%; top: 47.5%;"></div>
+          <div class="zona" data-musculo="Pelvis" style="left: 82%; top: 54%;"></div>
+          <div class="zona" data-musculo="Fémur" style="left: 82%; top: 66.5%;"></div>
+        </div>
+      </div>
+
+      <div class="feedback">Arrastra un hueso y suéltalo en su lugar.</div>
+      <button class="boton-reset" type="button">Volver a empezar</button>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
