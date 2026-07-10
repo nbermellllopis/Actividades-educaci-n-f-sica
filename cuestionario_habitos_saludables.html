@@ -1,15 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cuestionario de músculos y huesos</title>
-  <meta name="theme-color" content="#1d4ed8">
+  <title>Cuestionario de hábitos saludables y alimentación</title>
+  <meta name="theme-color" content="#15803d">
   <link rel="manifest" href="manifest.json">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f7e7ff, #fff1d6);
+      background: linear-gradient(135deg, #edf8f1, #fff5dc);
       color: #2f3e46;
       margin: 0;
       padding: 24px;
@@ -49,7 +49,7 @@
     h1 {
       margin-top: 0;
       text-align: center;
-      color: #1d4ed8;
+      color: #15803d;
     }
 
     .intro {
@@ -64,6 +64,7 @@
       max-width: 280px;
       width: 100%;
       border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
     }
 
     .pregunta {
@@ -124,7 +125,7 @@
       padding: 10px 16px;
       font-size: 1rem;
       cursor: pointer;
-      background: #2563eb;
+      background: #15803d;
       color: white;
     }
 
@@ -139,7 +140,7 @@
     }
 
     .resultado h2 {
-      color: #1d4ed8;
+      color: #15803d;
     }
 
     .resultado p {
@@ -150,9 +151,9 @@
 <body>
   <main class="contenedor">
     <a class="menu-inicial" href="index.html">Menú inicial</a>
-    <h1>Cuestionario: músculos y huesos</h1>
-    <p class="intro">Responde a estas 15 preguntas y descubre cuánto sabes sobre tu cuerpo.</p>
-    <img id="imagenPregunta" class="imagen" src="images/esqueleto.jpg" alt="Imagen de referencia para la pregunta">
+    <h1>Cuestionario: hábitos saludables y alimentación</h1>
+    <p class="intro">Responde a estas 15 preguntas y demuestra cuánto sabes sobre hábitos saludables, alimentación y cuidado del cuerpo.</p>
+    <img id="imagenPregunta" class="imagen" src="images/pan.png" alt="Imagen de referencia para la pregunta">
 
     <section id="quiz">
       <div id="pregunta" class="pregunta"></div>
@@ -171,111 +172,111 @@
   </main>
 
   <script>
-        const preguntas = [
+    const preguntas = [
       {
-        pregunta: '¿Cuál es la principal función del esqueleto?',
-        opciones: ['Transportar oxígeno por el cuerpo', 'Sostener el cuerpo y proteger los órganos internos', 'Producir la digestión de los alimentos'],
-        correcta: 1,
-        imagen: 'images/esqueleto_huesos.png',
-        alt: 'Esqueleto humano completo'
-      },
-      {
-        pregunta: '¿Qué hueso protege principalmente el cerebro?',
-        opciones: ['La mandíbula', 'El cráneo', 'La clavícula'],
-        correcta: 1,
-        imagen: 'images/cerebro.jpg',
-        alt: 'Cráneo y cerebro'
-      },
-      {
-        pregunta: '¿Qué músculo permite doblar el brazo al flexionar el codo?',
-        opciones: ['Bíceps', 'Cuádriceps', 'Gemelo'],
-        correcta: 0,
-        imagen: 'images/musculos-frente.jpg',
-        alt: 'Músculos del brazo'
-      },
-      {
-        pregunta: '¿Qué hueso es el más largo del cuerpo humano?',
-        opciones: ['Tibia', 'Húmero', 'Fémur'],
+        pregunta: '¿Cuál de estas comidas sería la más adecuada para un desayuno equilibrado?',
+        opciones: ['Un bollo industrial y un refresco.', 'Patatas fritas y un zumo azucarado.', 'Leche o yogur, fruta y pan integral con aceite de oliva.'],
         correcta: 2,
-        imagen: 'images/huesos.jpg',
-        alt: 'Huesos de las piernas'
+        imagen: 'images/pan.png',
+        alt: 'Desayuno saludable'
       },
       {
-        pregunta: '¿Cuál de estos músculos se encuentra en la parte delantera del muslo?',
-        opciones: ['Cuádriceps', 'Tríceps', 'Trapecio'],
+        pregunta: '¿Cuánta agua es recomendable beber a lo largo del día, aproximadamente?',
+        opciones: ['Entre 1,5 y 2 litros, dependiendo de la edad y la actividad física.', 'Solo un vaso al día.', 'Más de 5 litros todos los días.'],
         correcta: 0,
-        imagen: 'images/musculos_delante.png',
-        alt: 'Músculos delanteros del cuerpo'
+        imagen: 'images/agua.png',
+        alt: 'Agua para hidratarse'
       },
       {
-        pregunta: '¿Qué articulación permite mover el brazo en muchas direcciones?',
-        opciones: ['Rodilla', 'Hombro', 'Tobillo'],
-        correcta: 1,
-        imagen: 'images/musculos-cuerpo.svg',
-        alt: 'Articulación del hombro'
+        pregunta: '¿Qué alimento es una buena fuente de proteínas?',
+        opciones: ['Refresco.', 'Mantequilla.', 'Pollo.'],
+        correcta: 2,
+        imagen: 'images/pollo.png',
+        alt: 'Pollo como fuente de proteínas'
       },
       {
-        pregunta: '¿Qué función tienen los músculos en el cuerpo?',
-        opciones: ['Fabricar sangre', 'Permitir el movimiento y mantener la postura', 'Almacenar el oxígeno'],
-        correcta: 1,
-        imagen: 'images/musculos-frente.jpg',
-        alt: 'Sistema muscular humano'
-      },
-      {
-        pregunta: '¿Cuál de estos huesos forma parte de la columna vertebral?',
-        opciones: ['Vértebra', 'Costilla', 'Escápula'],
+        pregunta: '¿Por qué es importante dormir las horas necesarias?',
+        opciones: ['Porque ayuda al crecimiento, al aprendizaje y a recuperar energía.', 'Porque fortalece únicamente los huesos.', 'Porque evita tener que hacer ejercicio.'],
         correcta: 0,
-        imagen: 'images/esqueleto_huesos.png',
-        alt: 'Columna vertebral'
+        imagen: 'images/nino.jpg',
+        alt: 'Descanso y sueño'
       },
       {
-        pregunta: '¿Qué músculo está situado en la parte posterior del brazo?',
-        opciones: ['Bíceps', 'Tríceps', 'Pectoral'],
-        correcta: 1,
-        imagen: 'images/musculos_detras.png',
-        alt: 'Músculos posteriores del brazo'
-      },
-      {
-        pregunta: '¿Qué huesos protegen principalmente el corazón y los pulmones?',
-        opciones: ['Las costillas', 'Las clavículas', 'Las escápulas'],
+        pregunta: '¿Qué hábito ayuda a mantener una buena salud cardiovascular?',
+        opciones: ['Realizar actividad física de forma regular.', 'Permanecer sentado la mayor parte del día.', 'Comer únicamente alimentos ricos en azúcar.'],
         correcta: 0,
-        imagen: 'images/esqueleto.jpg',
-        alt: 'Caja torácica y costillas'
+        imagen: 'images/celebrando.jpg',
+        alt: 'Actividad física y movimiento'
       },
       {
-        pregunta: '¿Qué ocurre cuando un músculo se contrae?',
-        opciones: ['Se acorta y genera fuerza', 'Se convierte en hueso', 'Deja de consumir energía'],
+        pregunta: '¿Cuál de estos alimentos pertenece al grupo de las frutas?',
+        opciones: ['Tomate.', 'Patata.', 'Plátano.'],
+        correcta: 2,
+        imagen: 'images/platano.png',
+        alt: 'Plátano'
+      },
+      {
+        pregunta: '¿Qué beneficio aporta consumir verduras con frecuencia?',
+        opciones: ['Aportan vitaminas, minerales y fibra.', 'Solo aportan agua.', 'Sustituyen completamente a las proteínas.'],
         correcta: 0,
-        imagen: 'images/levantando-vaso.jpg',
-        alt: 'Contracción muscular en el brazo'
+        imagen: 'images/brocoli.png',
+        alt: 'Verduras saludables'
       },
       {
-        pregunta: '¿Qué hueso une el brazo con el hombro?',
-        opciones: ['Radio', 'Húmero', 'Peroné'],
+        pregunta: '¿Cuál es la mejor bebida para hidratarse durante el día?',
+        opciones: ['Bebida energética.', 'Refresco con gas.', 'Agua.'],
+        correcta: 2,
+        imagen: 'images/agua.png',
+        alt: 'Agua'
+      },
+      {
+        pregunta: '¿Qué es una dieta equilibrada?',
+        opciones: ['Comer únicamente frutas y verduras.', 'Consumir alimentos variados en cantidades adecuadas.', 'Comer solo alimentos ricos en proteínas.'],
         correcta: 1,
-        imagen: 'images/huesos.jpg',
-        alt: 'Húmero en el brazo'
+        imagen: 'images/arroz.png',
+        alt: 'Alimentación variada'
       },
       {
-        pregunta: '¿Qué músculos trabajan principalmente cuando nos ponemos de puntillas?',
-        opciones: ['Gemelos', 'Abdominales', 'Deltoides'],
+        pregunta: '¿Qué debemos hacer antes de comer?',
+        opciones: ['Lavarnos las manos.', 'Beber un refresco.', 'Cepillarnos los dientes.'],
         correcta: 0,
-        imagen: 'images/musculos_detras.png',
-        alt: 'Gemelos en la parte posterior de la pierna'
+        imagen: 'images/zanahoria.png',
+        alt: 'Lavado de manos y higiene'
       },
       {
-        pregunta: '¿Qué tipo de tejido une un músculo a un hueso?',
-        opciones: ['Ligamento', 'Tendón', 'Cartílago'],
-        correcta: 1,
-        imagen: 'images/musculos-cuerpo.svg',
-        alt: 'Unión entre músculo y hueso'
+        pregunta: '¿Qué alimento aporta principalmente hidratos de carbono?',
+        opciones: ['Atún.', 'Huevo.', 'Arroz.'],
+        correcta: 2,
+        imagen: 'images/arroz.png',
+        alt: 'Arroz como fuente de hidratos de carbono'
       },
       {
-        pregunta: '¿Qué sistema del cuerpo forman conjuntamente los huesos, músculos y articulaciones?',
-        opciones: ['Sistema digestivo', 'Aparato locomotor', 'Sistema nervioso'],
+        pregunta: '¿Cuál de estos hábitos favorece una buena salud?',
+        opciones: ['Pasar muchas horas delante de una pantalla sin descansar.', 'Hacer ejercicio con regularidad y descansar lo suficiente.', 'Saltarse el desayuno todos los días.'],
         correcta: 1,
-        imagen: 'images/esqueleto_huesos.png',
-        alt: 'Aparato locomotor humano'
+        imagen: 'images/celebrando.jpg',
+        alt: 'Ejercicio y descanso'
+      },
+      {
+        pregunta: '¿Por qué es recomendable limitar el consumo de alimentos ultraprocesados?',
+        opciones: ['Porque suelen contener grandes cantidades de azúcar, sal y grasas poco saludables.', 'Porque no contienen ninguna vitamina.', 'Porque siempre producen alergias.'],
+        correcta: 0,
+        imagen: 'images/helado.png',
+        alt: 'Alimentos ultraprocesados'
+      },
+      {
+        pregunta: '¿Qué debemos hacer después de realizar una actividad física intensa?',
+        opciones: ['Evitar beber agua durante varias horas.', 'Comer únicamente dulces.', 'Hidratarse y permitir que el cuerpo se recupere.'],
+        correcta: 2,
+        imagen: 'images/agua.png',
+        alt: 'Hidratación tras el ejercicio'
+      },
+      {
+        pregunta: '¿Cuál de estas meriendas es la más saludable?',
+        opciones: ['Bollería industrial y un refresco.', 'Patatas fritas y una bebida energética.', 'Fruta y un puñado de frutos secos (si no existe alergia).'],
+        correcta: 2,
+        imagen: 'images/frutos_secos.png',
+        alt: 'Merienda saludable'
       }
     ];
 
@@ -305,16 +306,16 @@
         boton.className = 'opcion';
         boton.type = 'button';
         boton.textContent = `${String.fromCharCode(97 + index)}) ${opcion}`;
-        boton.addEventListener('click', () => comprobarRespuesta(index, boton));
+        boton.addEventListener('click', () => comprobarRespuesta(index));
         opcionesEl.appendChild(boton);
       });
 
-      imagenPreguntaEl.src = pregunta.imagen || 'images/esqueleto.jpg';
+      imagenPreguntaEl.src = pregunta.imagen || 'images/pan.png';
       imagenPreguntaEl.alt = pregunta.alt || 'Imagen de referencia para la pregunta';
       siguienteBtn.disabled = true;
     }
 
-    function comprobarRespuesta(index, boton) {
+    function comprobarRespuesta(index) {
       if (respuestaSeleccionada) return;
       respuestaSeleccionada = true;
       const correcta = preguntas[indiceActual].correcta;
@@ -356,7 +357,7 @@
       if (porcentaje === 100) {
         mensaje = '¡Fantástico! Has acertado todas las preguntas.';
       } else if (porcentaje >= 70) {
-        mensaje = '¡Muy bien! Has aprendido mucho sobre músculos y huesos.';
+        mensaje = '¡Muy bien! Tienes buenos hábitos saludables.';
       } else {
         mensaje = '¡Sigue practicando! Puedes volver a intentarlo.';
       }
@@ -388,4 +389,3 @@
   <script src="pwa-register.js"></script>
 </body>
 </html>
-

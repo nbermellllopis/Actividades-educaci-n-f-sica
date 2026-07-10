@@ -4,22 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El cuerpo humano</title>
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="index-body">
-  <h1>El cuerpo humano</h1>
-  <main id="contenido-principal" class="contenido">
-    <img src="images/nino.jpg" alt="Imagen relacionada con el cuerpo humano">
-    <div class="opciones">
-      <h2>Elige una actividad</h2>
-      <nav aria-label="Actividades">
+  <h1>Actividades de Educación Física</h1>
+  <main id="contenido-principal" class="contenido inicio-grid">
+    <section class="opciones franja-lateral" aria-labelledby="titulo-habitos">
+      <h2 id="titulo-habitos">Hábitos saludables</h2>
+      <nav aria-label="Actividades de hábitos saludables">
         <ul>
-          <li><a href="cuestionario.html">Cuestionario</a></li>
-          <li><a href="musculos.html">Músculos</a></li>
-          <li><a href="huesos.html">Huesos</a></li>
+          <li><a href="cuestionario_habitos_saludables.html">Hábitos saludables</a></li>
+          <li><a href="alimentacion.html">Pirámide de la alimentación</a></li>
         </ul>
       </nav>
-    </div>
+    </section>
+
+    <section class="bloque-icono" aria-label="Icono principal">
+      <img src="images/icono.png" alt="Icono de actividades de educación física">
+    </section>
+
+    <section class="opciones franja-lateral" aria-labelledby="titulo-cuerpo">
+      <h2 id="titulo-cuerpo">El cuerpo humano</h2>
+      <nav aria-label="Actividades del cuerpo humano">
+        <ul>
+          <li><a href="musculos.html">Músculos</a></li>
+          <li><a href="huesos.html">Huesos</a></li>
+          <li><a href="cuestionario.html">Cuestionario</a></li>
+        </ul>
+      </nav>
+    </section>
   </main>
+  <script src="pwa-register.js"></script>
 </body>
 </html>

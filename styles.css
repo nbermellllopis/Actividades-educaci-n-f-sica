@@ -27,6 +27,29 @@ body {
   flex-wrap: wrap;
 }
 
+.inicio-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 290px) minmax(260px, 420px) minmax(220px, 290px);
+  gap: 26px;
+  align-items: center;
+}
+
+.franja-lateral {
+  padding: 16px 18px;
+}
+
+.bloque-icono {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bloque-icono img {
+  width: min(100%, 420px);
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+}
+
 .contenido img {
   width: 320px;
   border-radius: 14px;
@@ -246,6 +269,14 @@ h2 {
 }
 
 @media (max-width: 760px) {
+  .inicio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bloque-icono {
+    order: -1;
+  }
+
   .menu-inicial.arriba-derecha {
     position: static;
     display: block;

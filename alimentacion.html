@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pirámide alimenticia</title>
+  <meta name="theme-color" content="#14532d">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      --fondo-1: #f6f0e6;
+      --fondo-2: #e8f5ee;
+      --panel: rgba(255, 255, 255, 0.9);
+      --texto: #20303c;
+      --azul: #2563eb;
+      --verde: #16a34a;
+      --naranja: #f59e0b;
+      --rojo: #ef4444;
+      --borde: rgba(37, 99, 235, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+      color: var(--texto);
+      background:
+        radial-gradient(circle at top left, rgba(22, 163, 74, 0.12), transparent 32%),
+      background: transparent;
+        linear-gradient(135deg, var(--fondo-1), var(--fondo-2));
+      padding: 22px;
+    }
+
+    .contenedor {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid var(--borde);
+      border-radius: 28px;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.14);
+      backdrop-filter: blur(8px);
+      padding: 22px;
+    }
+
+    .cabecera {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .menu-inicial {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 10px 16px;
+      border-radius: 999px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .menu-inicial:hover {
+      background: #bfdbfe;
+      transform: translateY(-1px);
+    }
+
+    .titulo-bloque {
+      flex: 1 1 420px;
+      text-align: center;
+      padding: 6px 0 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3rem);
+      color: #14532d;
+    }
+
+    .intro {
+      margin: 10px auto 0;
+      max-width: 720px;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .etiqueta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.12);
+      color: #166534;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .panel-juego {
+      display: grid;
+      grid-template-columns: minmax(170px, 0.65fr) minmax(0, 2fr) minmax(170px, 0.65fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .banco {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      border-radius: 22px;
+      padding: 10px;
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
+    }
+
+    .banco h2 {
+      margin: 0 0 8px;
+      color: #1d4ed8;
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    .banco-grupo {
+      margin-bottom: 8px;
+    }
+
+    .banco-grupo h3 {
+      margin: 0 0 5px;
+      font-size: 0.78rem;
+      color: #334155;
+      letter-spacing: 0.02em;
+    }
+
+    .lista-alimentos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .alimento {
+      appearance: none;
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      border-radius: 12px;
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      padding: 7px 5px 5px;
+      cursor: grab;
+      user-select: none;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .alimento:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+    }
+
+    .alimento:active {
+      cursor: grabbing;
+    }
+
+    .alimento.oculto {
+      display: none;
+    }
+
+    .alimento img {
+      width: 34px;
+      height: 34px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .alimento span {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #1e293b;
+      text-align: center;
+    }
+
+    .piramide-panel {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      border-radius: 24px;
+      padding: 14px 16px;
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
+      width: 100%;
+    }
+
+    .piramide-titulo {
+      margin: 0 0 12px;
+      color: #1d4ed8;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .piramide-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 2px solid rgba(37, 99, 235, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .piramide-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .piramide-dropzone {
+      position: relative;
+    }
+
+    .zona {
+      position: absolute;
+      border: 2px dashed rgba(255, 255, 255, 0.45);
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 8px;
+      color: #ffffff;
+      background: transparent;
+      backdrop-filter: blur(2px);
+      overflow: hidden;
+    }
+
+    .zona-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-content: flex-start;
+      justify-content: center;
+      min-height: 64px;
+    }
+
+    .zona--cereales {
+      left: 7%;
+      bottom: 5%;
+      width: 60%;
+      height: 18%;
+      background: transparent;
+    }
+
+    .zona--frutas {
+      left: 12%;
+      bottom: 23%;
+      width: 74%;
+      height: 19%;
+      background: transparent;
+    }
+
+    .zona--lacteos {
+      left: 22%;
+      bottom: 43%;
+      width: 56%;
+      height: 14%;
+      background: transparent;
+    }
+
+    .zona--carne {
+      left: 36%;
+      bottom: 57%;
+      width: 30%;
+      height: 19%;
+      background: transparent;
+    }
+
+    .zona--ocasionales {
+      left: 36%;
+      bottom: 79%;
+      width: 28%;
+      height: 12%;
+      background: transparent;
+    }
+
+    .zona--agua {
+      right: 6.5%;
+      bottom: 4%;
+      width: 24%;
+      height: 18%;
+      background: transparent;
+      border-color: transparent;
+    }
+
+    .mini-alimento {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      max-width: 100%;
+      padding: 4px 6px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    .mini-alimento--frutas,
+    .mini-alimento--lacteos,
+    .mini-alimento--frutos_secos,
+    .mini-alimento--carne {
+      gap: 5px;
+      padding: 4px 6px;
+    }
+
+    .mini-alimento--frutas img,
+    .mini-alimento--lacteos img,
+    .mini-alimento--frutos_secos img,
+    .mini-alimento--carne img {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+    }
+
+    .mini-alimento--frutas span,
+    .mini-alimento--lacteos span,
+    .mini-alimento--frutos_secos span,
+    .mini-alimento--carne span {
+      font-size: 0.65rem;
+    }
+
+    .mini-alimento img {
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #fff;
+      flex: 0 0 auto;
+    }
+
+    .mini-alimento span {
+      display: none;
+      font-size: 0.74rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .feedback {
+      margin-top: 14px;
+      text-align: center;
+      min-height: 24px;
+      font-weight: 700;
+      color: #14532d;
+    }
+
+    .acciones {
+      display: flex;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .boton-reset {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+    }
+
+    .boton-reset:hover {
+      background: #1d4ed8;
+    }
+
+    @media (max-width: 960px) {
+      .panel-juego {
+        grid-template-columns: 1fr;
+      }
+
+      .lista-alimentos {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 12px;
+      }
+
+      .contenedor {
+        padding: 16px;
+        border-radius: 22px;
+      }
+
+      .lista-alimentos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .zona {
+        border-radius: 14px;
+        padding: 8px;
+      }
+
+      .zona h3 {
+        font-size: 0.78rem;
+      }
+
+      .mini-alimento span {
+        font-size: 0.68rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="contenedor">
+    <div class="cabecera">
+      <a class="menu-inicial" href="index.html">Menú inicial</a>
+      <div class="titulo-bloque">
+        <h1>Pirámide alimenticia</h1>
+        <p class="intro">Arrastra cada imagen a la parte correcta de la pirámide. El agua va en la zona derecha de abajo.</p>
+        <div class="etiqueta">Actividad interactiva de alimentación</div>
+      </div>
+      <span style="width: 112px;"></span>
+    </div>
+
+    <section class="panel-juego" aria-label="Actividad de pirámide alimenticia">
+      <aside class="banco">
+        <h2>Alimentos para colocar</h2>
+        <div id="bancoIzquierdo"></div>
+      </aside>
+
+      <section class="piramide-panel">
+        <h2 class="piramide-titulo">Suelta aquí cada alimento sobre la pirámide</h2>
+        <div class="piramide-wrap piramide-dropzone" id="piramideWrap">
+          <img src="images/piramide.png" alt="Pirámide alimenticia vacía">
+
+          <div class="zona zona--ocasionales" data-zone="ocasionales" data-accepts="ocasionales">
+            <div class="zona-items"></div>
+          </div>
+
+          <div class="zona zona--lacteos" data-zone="lacteos" data-accepts="lacteos,frutos_secos">
+            <div class="zona-items"></div>
+          </div>
+
+          <div class="zona zona--carne" data-zone="carne" data-accepts="carne">
+            <div class="zona-items"></div>
+          </div>
+
+          <div class="zona zona--frutas" data-zone="frutas" data-accepts="frutas">
+            <div class="zona-items"></div>
+          </div>
+
+          <div class="zona zona--cereales" data-zone="cereales" data-accepts="cereales">
+            <div class="zona-items"></div>
+          </div>
+
+          <div class="zona zona--agua" data-zone="agua" data-accepts="agua">
+            <div class="zona-items"></div>
+          </div>
+        </div>
+
+        <div id="feedback" class="feedback">Arrastra cada alimento a su grupo.</div>
+        <div class="acciones">
+          <button id="reiniciar" class="boton-reset" type="button">Volver a empezar</button>
+        </div>
+      </section>
+
+      <aside class="banco">
+        <h2>Alimentos para colocar</h2>
+        <div id="bancoDerecho"></div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const alimentos = [
+        { id: 'agua', nombre: 'Agua', archivo: 'agua.png', categoria: 'agua' },
+        { id: 'pan', nombre: 'Pan', archivo: 'pan.png', categoria: 'cereales' },
+        { id: 'arroz', nombre: 'Arroz', archivo: 'arroz.png', categoria: 'cereales' },
+        { id: 'pasta', nombre: 'Pasta', archivo: 'pasta.png', categoria: 'cereales' },
+        { id: 'brocoli', nombre: 'Brócoli', archivo: 'brocoli.png', categoria: 'frutas' },
+        { id: 'zanahoria', nombre: 'Zanahoria', archivo: 'zanahoria.png', categoria: 'frutas' },
+        { id: 'berengena', nombre: 'Berenjena', archivo: 'berengena.png', categoria: 'frutas' },
+        { id: 'fresa', nombre: 'Fresa', archivo: 'fresa.png', categoria: 'frutas' },
+        { id: 'platano', nombre: 'Plátano', archivo: 'platano.png', categoria: 'frutas' },
+        { id: 'sandia', nombre: 'Sandía', archivo: 'sandia.png', categoria: 'frutas' },
+        { id: 'leche', nombre: 'Leche', archivo: 'leche.png', categoria: 'lacteos' },
+        { id: 'queso', nombre: 'Queso', archivo: 'queso.png', categoria: 'lacteos' },
+        { id: 'huevos', nombre: 'Huevos', archivo: 'huevos.png', categoria: 'lacteos' },
+        { id: 'pollo', nombre: 'Pollo', archivo: 'pollo.png', categoria: 'lacteos' },
+        { id: 'pescado', nombre: 'Pescado', archivo: 'pescado.png', categoria: 'lacteos' },
+        { id: 'frutos_secos', nombre: 'Frutos secos', archivo: 'frutos_secos.png', categoria: 'frutos_secos' },
+        { id: 'carne_roja', nombre: 'Carne roja', archivo: 'carne_roja.png', categoria: 'carne' },
+        { id: 'embutido', nombre: 'Embutido', archivo: 'embutido.png', categoria: 'carne' },
+        { id: 'helado', nombre: 'Helado', archivo: 'helado.png', categoria: 'ocasionales' }
+      ];
+
+      const grupos = [
+        {
+          titulo: 'Base diaria',
+          items: alimentos.filter((alimento) => alimento.categoria === 'cereales')
+        },
+        {
+          titulo: 'Frutas y verduras',
+          items: alimentos.filter((alimento) => alimento.categoria === 'frutas')
+        },
+        {
+          titulo: 'Lácteos y frutos secos',
+          items: alimentos.filter((alimento) => alimento.categoria === 'lacteos' || alimento.categoria === 'frutos_secos')
+        },
+        {
+          titulo: 'Carne y embutido',
+          items: alimentos.filter((alimento) => alimento.categoria === 'carne')
+        },
+        {
+          titulo: 'Ocasionales y agua',
+          items: alimentos.filter((alimento) => alimento.categoria === 'ocasionales' || alimento.categoria === 'agua')
+        }
+      ];
+
+      const bancoIzquierdo = document.getElementById('bancoIzquierdo');
+      const bancoDerecho = document.getElementById('bancoDerecho');
+      const feedback = document.getElementById('feedback');
+      const reiniciar = document.getElementById('reiniciar');
+      const zonas = Array.from(document.querySelectorAll('.zona'));
+      const mapaAlimentos = new Map();
+
+      const mitad = Math.ceil(alimentos.length / 2);
+      const alimentosIzquierda = alimentos.slice(0, mitad);
+      const alimentosDerecha = alimentos.slice(mitad);
+
+      const crearListaAlimentos = (destino, listaAlimentos) => {
+        const bloque = document.createElement('section');
+        bloque.className = 'banco-grupo';
+        bloque.innerHTML = '<div class="lista-alimentos"></div>';
+        const lista = bloque.querySelector('.lista-alimentos');
+
+        listaAlimentos.forEach((alimento) => {
+          const boton = document.createElement('button');
+          boton.type = 'button';
+          boton.className = 'alimento';
+          boton.draggable = true;
+          boton.dataset.alimento = alimento.id;
+          boton.dataset.categoria = alimento.categoria;
+          boton.dataset.nombre = alimento.nombre;
+          boton.dataset.archivo = alimento.archivo;
+          boton.innerHTML = `
+            <img src="images/${alimento.archivo}" alt="${alimento.nombre}">
+            <span>${alimento.nombre}</span>
+          `;
+
+          boton.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text/plain', alimento.id);
+            event.dataTransfer.effectAllowed = 'move';
+          });
+
+          mapaAlimentos.set(alimento.id, boton);
+          lista.appendChild(boton);
+        });
+
+        destino.appendChild(bloque);
+      };
+
+      crearListaAlimentos(bancoIzquierdo, alimentosIzquierda);
+      crearListaAlimentos(bancoDerecho, alimentosDerecha);
+
+      zonas.forEach((zona) => {
+        zona.addEventListener('dragover', (event) => {
+          event.preventDefault();
+        });
+
+        zona.addEventListener('drop', (event) => {
+          event.preventDefault();
+          const id = event.dataTransfer.getData('text/plain');
+          const alimento = alimentos.find((item) => item.id === id);
+          const boton = mapaAlimentos.get(id);
+
+          if (!alimento || !boton || boton.classList.contains('oculto')) {
+            return;
+          }
+
+          const categoriasAceptadas = (zona.dataset.accepts || '').split(',');
+          if (!categoriasAceptadas.includes(alimento.categoria)) {
+            feedback.textContent = `No, ${alimento.nombre} no va en esa zona.`;
+            return;
+          }
+
+          const mini = document.createElement('div');
+          mini.className = `mini-alimento mini-alimento--${alimento.categoria}`;
+          mini.title = alimento.nombre;
+          mini.setAttribute('aria-label', alimento.nombre);
+          mini.innerHTML = `
+            <img src="images/${alimento.archivo}" alt="${alimento.nombre}">
+            <span>${alimento.nombre}</span>
+          `;
+
+          zona.querySelector('.zona-items').appendChild(mini);
+          boton.classList.add('oculto');
+          feedback.textContent = `Correcto: ${alimento.nombre}.`;
+
+          const restantes = Array.from(mapaAlimentos.values()).some((elemento) => !elemento.classList.contains('oculto'));
+          if (!restantes) {
+            feedback.textContent = 'Has completado la pirámide alimenticia.';
+          }
+        });
+      });
+
+      reiniciar.addEventListener('click', () => {
+        mapaAlimentos.forEach((boton) => {
+          boton.classList.remove('oculto');
+        });
+
+        zonas.forEach((zona) => {
+          zona.querySelector('.zona-items').innerHTML = '';
+        });
+
+        feedback.textContent = 'Arrastra cada alimento a su grupo.';
+      });
+    });
+  </script>
+  <script src="pwa-register.js"></script>
+</body>
+</html>
